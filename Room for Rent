@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Room for Rent | Near MRT Cochrane | Female Foreigner Friendly</title>
+  <!-- Google Fonts & simple CSS reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #e9f0f5 0%, #d9e2ec 100%);
+      padding: 2rem 1.5rem;
+      color: #1a2c3e;
+    }
+
+    /* main container */
+    .ad-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    /* interactive gallery / hero section */
+    .gallery-section {
+      position: relative;
+      background: #f8fafc;
+    }
+
+    .main-image-frame {
+      width: 100%;
+      height: 480px;
+      background: #2c3e4e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .main-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .main-image-frame:hover .main-image {
+      transform: scale(1.02);
+    }
+
+    .thumbnail-strip {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      background: white;
+      border-top: 1px solid #eef2f6;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .thumbnail {
+      width: 85px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 14px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .thumbnail.active {
+      border-color: #2c7da0;
+      transform: scale(0.98);
+      box-shadow: 0 4px 12px rgba(44,125,160,0.3);
+    }
+
+    .thumbnail:hover {
+      transform: translateY(-3px);
+      border-color: #61a5c2;
+    }
+
+    /* content sections */
+    .content-padding {
+      padding: 2rem 2rem 2rem 2rem;
+    }
+
+    .badge-prime {
+      background: #2c7da0;
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-block;
+      letter-spacing: 0.3px;
+    }
+
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin: 0.75rem 0 0.5rem 0;
+      color: #0b2b3b;
+    }
+
+    .price-tag {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: #1e6f5c;
+      background: #e0f2e9;
+      display: inline-block;
+      padding: 0.2rem 1.4rem;
+      border-radius: 60px;
+      margin: 0.5rem 0 1rem 0;
+    }
+
+    .price-tag small {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2c5a4a;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0 1.8rem 0;
+    }
+
+    .info-card {
+      background: #f8fafd;
+      padding: 1rem 1.2rem;
+      border-radius: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: 0.2s;
+      border: 1px solid #e2edf2;
+    }
+
+    .info-card i {
+      font-size: 1.8rem;
+      color: #2c7da0;
+      width: 40px;
+      text-align: center;
+    }
+
+    .info-card .info-text h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #5e7f8c;
+    }
+
+    .info-card .info-text p {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1e3b4a;
+      margin-top: 4px;
+    }
+
+    .highlight-feature {
+      background: #fef9e6;
+      border-left: 6px solid #ffb347;
+    }
+
+    .description {
+      line-height: 1.55;
+      margin: 1rem 0 1.5rem 0;
+      font-size: 1rem;
+      color: #2c3e44;
+    }
+
+    .contact-section {
+      background: #eef3fa;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-number {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      letter-spacing: 0.5px;
+      color: #1b5e6b;
+    }
+
+    .contact-number i {
+      font-size: 1.5rem;
+      color: #1e6f5c;
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.2s;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(37,211,102,0.3);
+    }
+
+    .btn-whatsapp:hover {
+      background: #128C7E;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(37,211,102,0.4);
+    }
+
+    .btn-copy {
+      background: #ffffff;
+      border: 1px solid #cbdde6;
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #2c7da0;
+    }
+
+    .btn-copy:hover {
+      background: #e2f0f5;
+      border-color: #2c7da0;
+    }
+
+    .toast-msg {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e3b4a;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-weight: 500;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      font-size: 0.9rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .toast-msg.show {
+      opacity: 1;
+    }
+
+    /* responsive */
+    @media (max-width: 750px) {
+      body {
+        padding: 1rem;
+      }
+      .content-padding {
+        padding: 1.5rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      .price-tag {
+        font-size: 1.8rem;
+      }
+      .contact-number {
+        font-size: 1.2rem;
+        padding: 0.4rem 1rem;
+      }
+      .btn-whatsapp {
+        padding: 0.6rem 1.4rem;
+        font-size: 0.9rem;
+      }
+      .main-image-frame {
+        height: 320px;
+      }
+    }
+
+    /* interactive image hover feedback */
+    .feature-flag {
+      background: #2c7da0;
+    }
+
+    hr {
+      margin: 1rem 0;
+      border: 0;
+      height: 1px;
+      background: #dce5ec;
+    }
+
+    .location-icon {
+      font-weight: 600;
+    }
+    i.fa, i.fab, i.far {
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="ad-container">
+  <!-- GALLERY AREA (interactive photo carousel) -->
+  <div class="gallery-section">
+    <div class="main-image-frame" id="mainImageFrame">
+      <img id="mainDisplayImg" class="main-image" src="https://placehold.co/1200x800/e2e9f0/6c8e9f?text=Room+Preview+1" alt="Room preview main">
+    </div>
+    <div class="thumbnail-strip" id="thumbnailStrip">
+      <!-- thumbnails will be dynamically injected but fallback images are created from placeholders with room vibe. 
+           We use Font Awesome / styled abstract images but also we can embed base64 images? To make it realistic without external urls,
+           I'll generate clean SVG inline placeholders that represent room, bathroom, kitchen, MRT location etc to match "Flat/Apartment" -->
+    </div>
+  </div>
+
+  <div class="content-padding">
+    <!-- top badge -->
+    <span class="badge-prime"><i class="fas fa-check-circle" style="margin-right: 6px;"></i> Verified Listing · Immediate Move-in</span>
+    
+    <h1>Cozy & Convenient Room<br><span style="font-size: 1.2rem; font-weight: 500;">🏡 Shared toilet · Female preferred · MRT Cochrane</span></h1>
+    
+    <div class="price-tag">
+      RM 400 <small>/month</small>
+    </div>
+
+    <!-- interactive info grid -->
+    <div class="info-grid">
+      <div class="info-card">
+        <i class="fas fa-bed"></i>
+        <div class="info-text">
+          <h3>Room type</h3>
+          <p>Small room (sharing toilet)</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <i class="fas fa-building"></i>
+        <div class="info-text">
+          <h3>Property</h3>
+          <p>Flat/Apartment · Partially furnished</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <i class="fas fa-utensils"></i>
+        <div class="info-text">
+          <h3>Cooking allowed</h3>
+          <p>✅ Yes, basic cook friendly</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <i class="fas fa-train"></i>
+        <div class="info-text">
+          <h3>Transit & location</h3>
+          <p>Near MRT Cochrane (walking distance)</p>
+        </div>
+      </div>
+      <div class="info-card highlight-feature">
+        <i class="fas fa-female"></i>
+        <div class="info-text">
+          <h3>Tenant preference</h3>
+          <p>👩 Female foreigner / Female professional</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <i class="fas fa-shower"></i>
+        <div class="info-text">
+          <h3>Toilet</h3>
+          <p>Shared (clean & maintained)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- description -->
+    <div class="description">
+      <p><i class="fas fa-map-pin" style="color:#2c7da0; margin-right: 6px;"></i> <strong>✔ Strategic location:</strong> Just minutes away from MRT Cochrane station, easy access to KL city centre, Ikea Cheras, MyTown, and public transport hubs.</p>
+      <p><i class="fas fa-home" style="color:#2c7da0; margin-right: 6px;"></i> <strong>✔ Comfortable living:</strong> Partially furnished flat with shared toilet, bright small room perfect for a student or working adult. Cooking is allowed – simple meals welcome.</p>
+      <p><i class="fas fa-globe-asia" style="color:#2c7da0; margin-right: 6px;"></i> <strong>✔ Welcoming to female foreigners:</strong> Safe environment, same-gender preference only. Friendly neighbourhood, 24-hour security in apartment complex.</p>
+      <p><i class="fas fa-calendar-alt" style="color:#2c7da0; margin-right: 6px;"></i> Immediate availability, utilities discussion negotiable. Don't miss this affordable gem in Cheras!</p>
+    </div>
+
+    <!-- interactive contact area with copy & WhatsApp -->
+    <div class="contact-section">
+      <div class="contact-number" id="contactNumberDisplay">
+        <i class="fab fa-whatsapp"></i> 
+        <span id="phoneNumberSpan">011 2826 6895</span>
+        <button class="btn-copy" id="copyPhoneBtn" style="margin-left: 8px;"><i class="far fa-copy"></i> Copy</button>
+      </div>
+      <a href="https://wa.me/601128266895?text=Hi%2C%20I%27m%20interested%20in%20the%20RM400%20room%20near%20MRT%20Cochrane%20(Female%20foreigner%20friendly)" target="_blank" class="btn-whatsapp" id="whatsappDirectBtn">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+    
+    <hr />
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 8px;">
+      <div><i class="fas fa-tag"></i> <strong>Rent:</strong> RM 400 (excluding utilities, negotiable)</div>
+      <div><i class="fas fa-phone-alt"></i> Contact person: <strong> +60 11 2826 6895</strong></div>
+      <div><i class="fas fa-passport"></i> Preferred: Female foreigner / student / expat</div>
+    </div>
+  </div>
+</div>
+
+<div id="toastMessage" class="toast-msg">📋 Copied to clipboard!</div>
+
+<script>
+  // ---- IMAGE GALLERY (interactive) ----
+  // Instead of external images we use stylish, appealing SVG placeholder images with room/flat theme
+  // but still match the vibe of "small room, apartment, cooking area, MRT near"
+  // To make it fully interactive with custom images or attractive graphics, we design 4 scenic base64 inline SVGs.
+  // This ensures the ad works anywhere (GitHub pages) without external assets.
+  
+  const imagesData = [
+    {
+      id: 1,
+      name: "Cozy small room",
+      url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%23cddde9'/%3E%3Ctext x='40%25' y='45%25' fill='%23344e5c' font-size='22' font-family='monospace'%3E🛏️ Cozy Room%3C/text%3E%3Ctext x='30%25' y='60%25' fill='%23405e6e' font-size='16'%3ESmall room · Warm lighting%3C/text%3E%3C/svg%3E"
+    },
+    {
+      id: 2,
+      name: "Shared toilet & bathroom",
+      url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%23dce8f0'/%3E%3Ctext x='38%25' y='45%25' fill='%23244c5e' font-size='22'%3E🚿 Modern Shared Washroom%3C/text%3E%3Ctext x='30%25' y='60%25' fill='%232d5f6e' font-size='16'%3EClean · Well-maintained%3C/text%3E%3C/svg%3E"
+    },
+    {
+      id: 3,
+      name: "Kitchen area (cooking allowed)",
+      url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%23efe8cf'/%3E%3Ctext x='35%25' y='45%25' fill='%233d5a45' font-size='22'%3E🍳 Cooking allowed%3C/text%3E%3Ctext x='28%25' y='60%25' fill='%23385546' font-size='16'%3EPartially equipped · Basic cook friendly%3C/text%3E%3C/svg%3E"
+    },
+    {
+      id: 4,
+      name: "Near MRT Cochrane & Location",
+      url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%23c6e2e8'/%3E%3Ctext x='33%25' y='45%25' fill='%231b4d5e' font-size='22'%3E🚇 MRT Cochrane Station%3C/text%3E%3Ctext x='28%25' y='62%25' fill='%23254e62' font-size='16'%3E3 mins to station · strategic access%3C/text%3E%3C/svg%3E"
+    },
+    {
+      id: 5,
+      name: "Apartment exterior (flat)",
+      url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%23b5c9ce'/%3E%3Ctext x='40%25' y='45%25' fill='%232d3e4b' font-size='22'%3E🏢 Flat/Apartment%3C/text%3E%3Ctext x='30%25' y='60%25' fill='%233b5c6b' font-size='16'%3ESafe area · Female friendly (guard) %3C/text%3E%3C/svg%3E"
+    }
+  ];
+
+  let currentMainIndex = 0;
+  const mainImg = document.getElementById('mainDisplayImg');
+  const thumbContainer = document.getElementById('thumbnailStrip');
+
+  function buildThumbnails() {
+    thumbContainer.innerHTML = '';
+    imagesData.forEach((img, idx) => {
+      const thumb = document.createElement('img');
+      thumb.src = img.url;
+      thumb.alt = img.name;
+      thumb.classList.add('thumbnail');
+      if (idx === currentMainIndex) thumb.classList.add('active');
+      thumb.addEventListener('click', () => {
+        setMainImage(idx);
+      });
+      thumbContainer.appendChild(thumb);
+    });
+  }
+
+  function setMainImage(index) {
+    currentMainIndex = index;
+    mainImg.src = imagesData[index].url;
+    mainImg.alt = imagesData[index].name;
+    // update active thumbnail style
+    const allThumbs = document.querySelectorAll('.thumbnail');
+    allThumbs.forEach((thumb, i) => {
+      if (i === index) {
+        thumb.classList.add('active');
+      } else {
+        thumb.classList.remove('active');
+      }
+    });
+  }
+
+  // also add click on main image to cycle (extra interactivity)
+  function cycleImage() {
+    let next = (currentMainIndex + 1) % imagesData.length;
+    setMainImage(next);
+    showToast('🖼️ Switched image: ' + imagesData[next].name);
+  }
+
+  // initialize gallery
+  buildThumbnails();
+  setMainImage(0);
+  const mainFrame = document.getElementById('mainImageFrame');
+  mainFrame.addEventListener('click', cycleImage);
+
+  // --- COPY & WHATSAPP interactive features ----
+  const phoneRaw = "01128266895";   // actual number without spaces for whatsapp
+  const displayPhone = "011 2826 6895";
+  const copyBtn = document.getElementById('copyPhoneBtn');
+  const toastSpan = document.getElementById('toastMessage');
+  
+  function showToast(message) {
+    const toast = document.getElementById('toastMessage');
+    toast.textContent = message || "📋 Copied to clipboard!";
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2000);
+  }
+
+  copyBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    // copy display number stripped spaces? but we copy the formatted version
+    const numberToCopy = displayPhone;
+    navigator.clipboard.writeText(numberToCopy).then(() => {
+      showToast('📞 Phone number copied: ' + numberToCopy);
+    }).catch(() => {
+      // fallback
+      const textarea = document.createElement('textarea');
+      textarea.value = numberToCopy;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      showToast('📞 Number copied (manual)');
+    });
+  });
+  
+  // Ensure WhatsApp link is correct (remove spaces)
+  const whatsappBtn = document.getElementById('whatsappDirectBtn');
+  const cleanNumber = "601128266895";  // 011-28266895 -> Malaysia code 60 without leading 0? but 01128266895 leads to 601128266895
+  // According to format: 011 2826 6895 -> international: +601128266895
+  const internationalWhatsapp = "601128266895";
+  whatsappBtn.href = `https://wa.me/${internationalWhatsapp}?text=Hi%2C%20I%27m%20interested%20in%20the%20RM400%20room%20near%20MRT%20Cochrane%20(Female%20foreigner%20friendly)%20-%20Small%20room%2C%20shared%20toilet.%20Is%20it%20still%20available%3F`;
+
+  // add alternative hover interaction: tooltip for copy button
+  const contactDiv = document.querySelector('.contact-number');
+  if(contactDiv) {
+    contactDiv.style.cursor = "default";
+  }
+  
+  // also add a quick calculator / interactive rent info? But keep clean. Add a small interactive interest button
+  // extra interactive: "I'm interested" quick message prepopulate functionality (discrete)
+  const createRequestBtn = document.createElement('button');
+  createRequestBtn.className = "btn-copy";
+  createRequestBtn.style.marginTop = "0.5rem";
+  createRequestBtn.style.background = "#f0f4fa";
+  createRequestBtn.innerHTML = '<i class="far fa-envelope"></i> Quick inquiry template';
+  const parentDiv = document.querySelector('.contact-section');
+  const containerDivFlex = document.createElement('div');
+  containerDivFlex.style.display = 'flex';
+  containerDivFlex.style.justifyContent = 'flex-end';
+  containerDivFlex.style.marginTop = '10px';
+  createRequestBtn.addEventListener('click', () => {
+    const msg = encodeURIComponent("Hi, I'm interested in the RM400 room near MRT Cochrane. I'm a female foreigner/student. Could you share more details and the exact location?");
+    window.open(`https://wa.me/${internationalWhatsapp}?text=${msg}`, '_blank');
+  });
+  containerDivFlex.appendChild(createRequestBtn);
+  document.querySelector('.contact-section').appendChild(containerDivFlex);
+  
+  // Additional micro-interaction: show note when clicking on info cards
+  const infoCards = document.querySelectorAll('.info-card');
+  infoCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const titleElem = card.querySelector('.info-text h3');
+      if (titleElem) {
+        const feat = titleElem.innerText;
+        showToast(`🔍 ${feat} — included in this rental`);
+      }
+    });
+    card.style.cursor = "pointer";
+  });
+  
+  // floating subtle effect: highlight preferred tenant message
+  const highlightCard = document.querySelector('.highlight-feature');
+  if(highlightCard) {
+    highlightCard.addEventListener('click', () => {
+      showToast('👩 Tenant preference: Female foreigner only. Safe & comfortable environment.');
+    });
+  }
+  
+  // console ready and interactive demonstration
+  console.log("Interactive room ad ready | Rent RM400, MRT Cochrane, Female foreigner");
+  
+  // extra: rent detail interactive
+  const priceDiv = document.querySelector('.price-tag');
+  if(priceDiv) {
+    priceDiv.addEventListener('click', () => {
+      showToast('💵 RM 400/month — partially furnished, cooking allowed, near MRT!');
+    });
+  }
+  
+  // ensure all images responsive, final micro interaction: welcome foreigner note
+  const heroBadge = document.querySelector('.badge-prime');
+  if(heroBadge) heroBadge.style.cursor = "pointer";
+  heroBadge?.addEventListener('click', () => {
+    showToast('✅ Verified listing — direct contact person, immediate viewing possible!');
+  });
+</script>
+</body>
+</html>
